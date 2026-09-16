@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Karla:wght@300;400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #16294a;
+  --navy-deep: #0d1b33;
+  --brass: #c2a04a;
+  --parchment: #f7f3ea;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--parchment);
+    color: var(--navy-deep);
+    font-family: Karla, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background: var(--brass);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* The arc lifted from the emblem, used as a structural frame. */
+  .arc-frame {
+    position: absolute;
+    border: 1px solid currentColor;
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    opacity: 0.22;
+    pointer-events: none;
+  }
+
+  .rule-brass {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--brass) 18%,
+      var(--brass) 82%,
+      transparent
+    );
+  }
+
+  .paper {
+    background-color: var(--parchment);
+    background-image: radial-gradient(
+        rgba(22, 41, 74, 0.035) 1px,
+        transparent 1px
+      ),
+      radial-gradient(rgba(194, 160, 74, 0.05) 1px, transparent 1px);
+    background-size: 22px 22px, 34px 34px;
+    background-position: 0 0, 11px 17px;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(var(--brass), var(--brass));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    transition: background-size 0.35s ease;
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+/* One orchestrated page-load sequence on the hero only. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes drawArc {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.rise {
+  animation: rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.draw-arc {
+  animation: drawArc 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Long-form article typography */
+.prose-mrc {
+  color: rgba(13, 27, 51, 0.85);
+  font-size: 1.06rem;
+  line-height: 1.78;
+}
+
+.prose-mrc p {
+  margin-bottom: 1.35em;
+}
+
+.prose-mrc h2 {
+  margin-top: 2.4em;
+  margin-bottom: 0.7em;
+  color: var(--navy);
+  font-size: 1.6rem;
+  line-height: 1.25;
+}
+
+.prose-mrc ul {
+  margin: 0 0 1.5em;
+  padding: 0;
+  list-style: none;
+}
+
+.prose-mrc li {
+  position: relative;
+  margin-bottom: 0.75em;
+  padding-left: 1.6rem;
+}
+
+.prose-mrc li::before {
+  content: "";
+  position: absolute;
+  top: 0.85em;
+  left: 0;
+  width: 0.9rem;
+  height: 1px;
+  background: var(--brass);
+}
+
+.prose-mrc em {
+  font-style: italic;
+}
+
+.prose-mrc > p:first-of-type::first-letter {
+  float: left;
+  margin: 0.1em 0.12em 0 0;
+  color: var(--brass);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 3.4em;
+  line-height: 0.82;
+}
