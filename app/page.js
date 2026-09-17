@@ -41,8 +41,12 @@ export default function HomePage() {
           alt=""
           priority
           seed={2}
-          className="absolute inset-0 opacity-45"
+          className="absolute inset-0 opacity-40"
           sizes="100vw"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-b from-navy-deep/55 via-navy-deep/75 to-navy-deep"
         />
         <div className="arc-frame draw-arc left-1/2 top-[-60px] h-[760px] w-[1100px] -translate-x-1/2 text-brass" />
         <div className="arc-frame draw-arc left-1/2 top-[20px] h-[600px] w-[860px] -translate-x-1/2 text-parchment" />

@@ -30,13 +30,19 @@ export default function AboutPage() {
         eyebrow="About"
         title="A reading room with a desk attached"
         lede="We are a virtual club, three to four sessions a month, built around one idea: the conversation an author has with real readers is also the most useful market research they will ever get."
+        facts={[
+          ["Where", "Zoom"],
+          ["How often", "3–4 a month"],
+          ["Cost", "Free"],
+          ["Founded by", site.founder.name],
+        ]}
       />
 
       <Photo
         src={site.images.about}
         alt="Members of the club reading"
         seed={3}
-        className="h-[38vh] min-h-[260px] w-full"
+        className="h-[34vh] min-h-[220px] w-full"
         sizes="100vw"
       />
 
